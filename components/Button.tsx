@@ -1,6 +1,9 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 
-const Button = (props) => {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	text: string;
+}
+const Button = (props: ButtonProps) => {
 	return (
 		<button
 			{...props}

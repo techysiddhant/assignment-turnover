@@ -12,7 +12,6 @@ const LoginForm = () => {
 	const router = useRouter();
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(email, password);
 		if (!email || !password) {
 			alert("Enter the Required information");
 			return;

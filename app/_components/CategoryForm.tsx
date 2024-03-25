@@ -17,7 +17,7 @@ interface Category {
 }
 const CategoryForm = () => {
 	const [data, setData] = useState([]);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState<number>(1);
 	const [categoryLength, setCategoryLength] = useState();
 	const handleapi = async () => {
 		const res = await axios.get(`/api/categories?page=${page}&limit=6`);
@@ -80,7 +80,7 @@ const CategoryForm = () => {
 				currentPage={page}
 				total={100}
 				limit={6}
-				onPageChange={(page: number) => setPage(page)}
+				onPageChange={(page) => setPage(page)}
 			/>
 		</div>
 	);

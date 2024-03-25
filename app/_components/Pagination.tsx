@@ -1,8 +1,29 @@
 "use client";
-const range = (start, end) => {
+interface GetPagesCutProps {
+	pagesCount: number;
+	pagesCutCount: number;
+	currentPage: number;
+}
+interface PaginationItemProps {
+	page: string | number;
+	currentPage: number;
+	onPageChange: (page?: number | string) => void;
+	isDisabled?: boolean;
+}
+interface PaginationProps {
+	currentPage: number;
+	total: number;
+	limit: number;
+	onPageChange: (pageNumber: number | ((prev: number) => number)) => void;
+}
+const range = (start: number, end: number) => {
 	return [...Array(end - start).keys()].map((el) => el + start);
 };
-const getPagesCut = ({ pagesCount, pagesCutCount, currentPage }) => {
+const getPagesCut = ({
+	pagesCount,
+	pagesCutCount,
+	currentPage,
+}: GetPagesCutProps) => {
 	const ceiling = Math.ceil(pagesCutCount / 2);
 	const floor = Math.floor(pagesCutCount / 2);
 	if (pagesCount < pagesCutCount) {
@@ -15,7 +36,12 @@ const getPagesCut = ({ pagesCount, pagesCutCount, currentPage }) => {
 		return { start: currentPage - ceiling + 1, end: currentPage + floor + 1 };
 	}
 };
-const PaginationItem = ({ page, currentPage, onPageChange, isDisabled }) => {
+const PaginationItem = ({
+	page,
+	currentPage,
+	onPageChange,
+	isDisabled,
+}: PaginationItemProps) => {
 	return (
 		<li
 			className={` cursor-pointer text-lg font-semibold ${
@@ -27,13 +53,15 @@ const PaginationItem = ({ page, currentPage, onPageChange, isDisabled }) => {
 		</li>
 	);
 };
-const Pagination = ({ currentPage, total, limit, onPageChange }) => {
+const Pagination = ({
+	currentPage,
+	total,
+	limit,
+	onPageChange,
+}: PaginationProps) => {
 	const pagesCount = Math.ceil(total / limit);
 	const pagesCut = getPagesCut({ pagesCount, pagesCutCount: 7, currentPage });
 	const pages = range(pagesCut.start, pagesCut.end);
-	// console.log(pagesCount);
-	// console.log(pagesCut);
-	// console.log(pages.length);
 	const isFirstPage = currentPage === 1;
 	const isLastPage = currentPage === pagesCount;
 	return (
@@ -48,7 +76,7 @@ const Pagination = ({ currentPage, total, limit, onPageChange }) => {
 				page="&lt;"
 				currentPage={currentPage}
 				onPageChange={() =>
-					onPageChange((prev: number) => (prev === 1 ? 1 : currentPage - 1))
+					onPageChange((prev: number) => (prev === 1 ? 1 : prev - 1))
 				}
 				isDisabled={isFirstPage}
 			/>
@@ -57,7 +85,7 @@ const Pagination = ({ currentPage, total, limit, onPageChange }) => {
 					page={page}
 					key={page}
 					currentPage={currentPage}
-					onPageChange={onPageChange}
+					onPageChange={() => onPageChange(page)}
 				/>
 			))}
 			<PaginationItem
