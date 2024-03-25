@@ -28,6 +28,7 @@ const SignupForm = () => {
 			}
 		} catch (error) {
 			console.log(error);
+			alert("User already Exists");
 		}
 	};
 	return (

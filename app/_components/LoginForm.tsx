@@ -31,6 +31,7 @@ const LoginForm = () => {
 			}
 		} catch (error) {
 			console.log(error);
+			alert("User not found!");
 		}
 	};
 	return (
