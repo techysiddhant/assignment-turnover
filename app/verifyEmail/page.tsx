@@ -15,7 +15,7 @@ const VerifyEmail = () => {
 		if (!email) {
 			router.push("/login");
 		}
-	}, [email]);
+	}, [email, router]);
 	const onOtpSubmit = (otp: string) => {
 		setOtp(otp);
 	};

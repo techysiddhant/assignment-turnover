@@ -69,7 +69,7 @@ const LoginForm = () => {
 			</div>
 			<div className="w-full h-[1.5px] bg-[#c1c1c1]"></div>
 			<p className="text-center text-[16px]">
-				Don't have an Account?{" "}
+				Don&apos;t have an Account?{" "}
 				<Link
 					href="/"
 					className="font-medium  uppercase"

@@ -1,5 +1,5 @@
 "use client";
-const range = (start: number, end: number) => {
+const range = (start, end) => {
 	return [...Array(end - start).keys()].map((el) => el + start);
 };
 const getPagesCut = ({ pagesCount, pagesCutCount, currentPage }) => {
